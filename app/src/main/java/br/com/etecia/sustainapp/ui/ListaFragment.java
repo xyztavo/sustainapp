@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.ArrayList;
+
 import br.com.etecia.sustainapp.R;
 import br.com.etecia.sustainapp.data.SmartItemAdapter;
 import br.com.etecia.sustainapp.data.SmartViewModel;
