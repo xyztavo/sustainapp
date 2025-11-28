@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_login">
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="br.com.etecia.sustainapp.ui.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="br.com.etecia.sustainapp.ui.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_cadastro"
+        android:name="br.com.etecia.sustainapp.ui.CadastroFragment"
+        android:label="Cadastro"
+        tools:layout="@layout/fragment_cadastro" />
+
+    <fragment
+        android:id="@+id/nav_lista"
+        android:name="br.com.etecia.sustainapp.ui.ListaFragment"
+        android:label="Lista"
+        tools:layout="@layout/fragment_lista" />
+
+    <fragment
+        android:id="@+id/nav_sobre"
+        android:name="br.com.etecia.sustainapp.ui.SobreFragment"
+        android:label="Sobre"
+        tools:layout="@layout/fragment_sobre" />
+
+    <action
+        android:id="@+id/action_login_to_home"
+        app:destination="@id/nav_home" />
+
+</navigation>
