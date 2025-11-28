@@ -36,8 +36,6 @@ public class HomeFragment extends Fragment {
 
         // Configurar ViewPager2 com TabLayout
         ViewPagerAdapter adapter = new ViewPagerAdapter(this);
-        adapter.addFragment(new Tab1Fragment(), "Mobilidade");
-        adapter.addFragment(new Tab2Fragment(), "Sustentabilidade");
         binding.viewPager.setAdapter(adapter);
 
         new TabLayoutMediator(binding.tabLayout, binding.viewPager,

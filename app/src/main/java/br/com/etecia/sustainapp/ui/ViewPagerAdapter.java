@@ -2,41 +2,40 @@ package br.com.etecia.sustainapp.ui;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
+import br.com.etecia.sustainapp.ui.tabs.Tab1Fragment;
+import br.com.etecia.sustainapp.ui.tabs.Tab2Fragment;
 
 /**
  * Adapter para ViewPager2 com fragments.
  */
-public class ViewPagerAdapter extends FragmentStateAdapter {
+public class ViewPagerAdapter extends androidx.viewpager2.adapter.FragmentStateAdapter {
 
-    private final List<Fragment> fragments = new ArrayList<>();
-    private final List<String> titles = new ArrayList<>();
+    private final String[] titles = {"Mobilidade", "Sustentabilidade"};
 
     public ViewPagerAdapter(@NonNull Fragment fragment) {
         super(fragment);
     }
 
-    public void addFragment(Fragment fragment, String title) {
-        fragments.add(fragment);
-        titles.add(title);
-    }
-
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return fragments.get(position);
+        switch (position) {
+            case 0:
+                return new Tab1Fragment();
+            case 1:
+                return new Tab2Fragment();
+            default:
+                return new Tab1Fragment();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return fragments.size();
+        return titles.length;
     }
 
     public CharSequence getPageTitle(int position) {
-        return titles.get(position);
+        return titles[position];
     }
 }
