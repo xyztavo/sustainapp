@@ -9,8 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.tabs.TabLayoutMediator;
+
 import br.com.etecia.sustainapp.R;
 import br.com.etecia.sustainapp.databinding.FragmentHomeBinding;
+import br.com.etecia.sustainapp.ui.tabs.Tab1Fragment;
+import br.com.etecia.sustainapp.ui.tabs.Tab2Fragment;
 
 /**
  * Fragment Home que exibe cards explicando o conceito de Cidades Inteligentes.
@@ -30,11 +34,17 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Configurar TabLayout com ViewPager2
-        // Para simplificar, vamos usar um TabLayout com fragments
-        // Mas como é MD3, usar TabLayoutMediator
+        // Configurar ViewPager2 com TabLayout
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this);
+        adapter.addFragment(new Tab1Fragment(), "Mobilidade");
+        adapter.addFragment(new Tab2Fragment(), "Sustentabilidade");
+        binding.viewPager.setAdapter(adapter);
 
-        // Aqui, vamos adicionar conteúdo estático nos cards
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager,
+                (tab, position) -> tab.setText(adapter.getPageTitle(position))
+        ).attach();
+
+        // Configurar cards
         binding.card1.setOnClickListener(v -> {
             // Ação opcional
         });
