@@ -68,6 +68,10 @@ public class ListaFragment extends Fragment {
         binding.recyclerView.setAdapter(adapter);
         Log.d("ListaFragment", "RecyclerView set up");
 
+        binding.btnBackHome.setOnClickListener(v -> {
+            Navigation.findNavController(view).navigate(R.id.action_lista_to_home);
+        });
+
         viewModel.getSmartItems().observe(getViewLifecycleOwner(), smartItems -> {
             Log.d("ListaFragment", "Items updated, size: " + smartItems.size());
             adapter.updateItems(smartItems);

@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-        NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
+        // NavigationUI.setupWithNavController(binding.navView, navController);
+        // NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.drawerLayout, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

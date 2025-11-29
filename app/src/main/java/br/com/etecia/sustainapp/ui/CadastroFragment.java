@@ -88,6 +88,10 @@ public class CadastroFragment extends Fragment {
                 Log.d("CadastroFragment", "Fields not filled");
             }
         });
+
+        binding.btnGoLista.setOnClickListener(v -> {
+            Navigation.findNavController(view).navigate(R.id.action_cadastro_to_lista);
+        });
     }
 
     @Override

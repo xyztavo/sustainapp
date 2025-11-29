@@ -40,8 +40,8 @@ public class HomeFragment extends Fragment {
         });
 
         binding.card2.setOnClickListener(v -> {
-            Log.d("HomeFragment", "Card2 clicked");
-            // Ação opcional
+            Log.d("HomeFragment", "Card2 clicked, navigating to lista");
+            Navigation.findNavController(view).navigate(R.id.action_home_to_lista);
         });
     }
 
