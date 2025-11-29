@@ -8,8 +8,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.Fragment;
 
 import br.com.etecia.sustainapp.R;
 import br.com.etecia.sustainapp.data.SmartItem;
@@ -50,6 +51,8 @@ public class CadastroFragment extends Fragment {
                 binding.etName.setText("");
                 binding.etCategory.setText("");
                 binding.etDescription.setText("");
+                // Navegar para lista
+                Navigation.findNavController(view).navigate(R.id.action_cadastro_to_lista);
             } else {
                 Toast.makeText(getContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             }
