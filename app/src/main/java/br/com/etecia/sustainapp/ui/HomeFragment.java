@@ -26,16 +26,19 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class HomeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
     private SmartViewModel viewModel;
     private SmartItemAdapter adapter;
+    private RecyclerView recyclerView;
+    private Button btnAddItem;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d("HomeFragment", "onCreateView");
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        recyclerView = view.findViewById(R.id.recycler_view);
+        btnAddItem = view.findViewById(R.id.btn_add_item);
+        return view;
     }
 
     @Override
