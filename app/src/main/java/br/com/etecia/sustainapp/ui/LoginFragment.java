@@ -37,7 +37,7 @@ public class LoginFragment extends Fragment {
             String password = binding.etPassword.getText().toString().trim();
 
             if (!email.isEmpty() && !password.isEmpty()) {
-                // Simulação de login (sem autenticação real)
+                // Simulação de login
                 Navigation.findNavController(view).navigate(R.id.action_login_to_home);
             } else {
                 Toast.makeText(getContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
