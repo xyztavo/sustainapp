@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import br.com.etecia.sustainapp.R;
 import br.com.etecia.sustainapp.data.SmartItem;
 import br.com.etecia.sustainapp.data.SmartItemAdapter;
+import br.com.etecia.sustainapp.data.SmartViewModel;
 import android.widget.Button;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -67,8 +68,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
         Log.d("HomeFragment", "RecyclerView set up");
 
         viewModel.getSmartItems().observe(getViewLifecycleOwner(), smartItems -> {
@@ -76,17 +77,19 @@ public class HomeFragment extends Fragment {
             adapter.updateItems(smartItems);
         });
 
-        binding.card1.setOnClickListener(v -> {
+        View card1 = view.findViewById(R.id.card1);
+        View card2 = view.findViewById(R.id.card2);
+        card1.setOnClickListener(v -> {
             Log.d("HomeFragment", "Card1 clicked, navigating to cadastro");
             Navigation.findNavController(view).navigate(R.id.action_home_to_cadastro);
         });
 
-        binding.card2.setOnClickListener(v -> {
+        card2.setOnClickListener(v -> {
             Log.d("HomeFragment", "Card2 clicked");
             // Optional
         });
 
-        binding.btnAddItem.setOnClickListener(v -> {
+        btnAddItem.setOnClickListener(v -> {
             Log.d("HomeFragment", "Add item clicked");
             Navigation.findNavController(view).navigate(R.id.action_home_to_cadastro);
         });
@@ -95,6 +98,5 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 }
