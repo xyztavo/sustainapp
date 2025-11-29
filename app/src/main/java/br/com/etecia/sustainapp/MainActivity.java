@@ -27,31 +27,44 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("MainActivity", "onCreate");
+        Log.d("MainActivity", "onCreate started");
         EdgeToEdge.enable(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Log.d("MainActivity", "setContentView done");
 
-        setSupportActionBar(binding.toolbar);
+        setSupportActionBar(binding.appBarMain.toolbar);
+        Log.d("MainActivity", "toolbar set");
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_content_main);
-        NavController navController = navHostFragment.getNavController();
+        Log.d("MainActivity", "navHostFragment: " + navHostFragment);
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+            Log.d("MainActivity", "navController: " + navController);
 
-        appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_cadastro, R.id.nav_lista, R.id.nav_sobre)
-                .setOpenableLayout(binding.drawerLayout)
-                .build();
+            appBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.nav_home, R.id.nav_cadastro, R.id.nav_lista, R.id.nav_sobre)
+                    .setOpenableLayout(binding.drawerLayout)
+                    .build();
+            Log.d("MainActivity", "appBarConfiguration created");
 
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-        NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
+            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+            Log.d("MainActivity", "setupActionBarWithNavController done");
+            NavigationUI.setupWithNavController(binding.navView, navController);
+            Log.d("MainActivity", "setupWithNavController navView done");
+            NavigationUI.setupWithNavController(binding.appBarMain.bottomNavigation, navController);
+            Log.d("MainActivity", "setupWithNavController bottomNavigation done");
+        } else {
+            Log.e("MainActivity", "navHostFragment is null");
+        }
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.drawerLayout, (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawer_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Log.d("MainActivity", "onCreate finished");
     }
 
     @Override
