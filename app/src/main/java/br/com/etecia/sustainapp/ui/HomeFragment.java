@@ -1,6 +1,7 @@
 package br.com.etecia.sustainapp.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d("HomeFragment", "onCreateView");
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -32,6 +34,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d("HomeFragment", "onViewCreated");
 
         // Configurar TabLayout com listener
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Mobilidade"));
@@ -40,6 +43,7 @@ public class HomeFragment extends Fragment {
         binding.tabLayout.addOnTabSelectedListener(new com.google.android.material.tabs.TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(com.google.android.material.tabs.TabLayout.Tab tab) {
+                Log.d("HomeFragment", "Tab selected: " + tab.getPosition());
                 if (tab.getPosition() == 0) {
                     binding.tabContent.setText("Mobilidade Inteligente: Sistemas de transporte público eficientes, compartilhamento de veículos e otimização de tráfego.");
                 } else {
@@ -56,10 +60,12 @@ public class HomeFragment extends Fragment {
 
         // Configurar cards
         binding.card1.setOnClickListener(v -> {
+            Log.d("HomeFragment", "Card1 clicked, navigating to cadastro");
             Navigation.findNavController(view).navigate(R.id.nav_cadastro);
         });
 
         binding.card2.setOnClickListener(v -> {
+            Log.d("HomeFragment", "Card2 clicked");
             // Ação opcional
         });
     }

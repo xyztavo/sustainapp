@@ -1,6 +1,7 @@
 package br.com.etecia.sustainapp.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class ListaFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d("ListaFragment", "onCreateView");
         binding = FragmentListaBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -39,11 +41,13 @@ public class ListaFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d("ListaFragment", "onViewCreated");
 
         viewModel = new ViewModelProvider(requireActivity()).get(SmartViewModel.class);
         adapter = new SmartItemAdapter(new ArrayList<>(), new SmartItemAdapter.OnItemClickListener() {
             @Override
             public void onEdit(int position) {
+                Log.d("ListaFragment", "Edit clicked for position: " + position);
                 SmartItem item = viewModel.getSmartItems().getValue().get(position);
                 Bundle bundle = new Bundle();
                 bundle.putString("name", item.getName());
@@ -55,14 +59,17 @@ public class ListaFragment extends Fragment {
 
             @Override
             public void onDelete(int position) {
+                Log.d("ListaFragment", "Delete clicked for position: " + position);
                 viewModel.removeItem(position);
             }
         });
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setAdapter(adapter);
+        Log.d("ListaFragment", "RecyclerView set up");
 
         viewModel.getSmartItems().observe(getViewLifecycleOwner(), smartItems -> {
+            Log.d("ListaFragment", "Items updated, size: " + smartItems.size());
             adapter.updateItems(smartItems);
         });
     }
