@@ -18,7 +18,8 @@ import java.util.ArrayList;
 import br.com.etecia.sustainapp.R;
 import br.com.etecia.sustainapp.data.SmartItem;
 import br.com.etecia.sustainapp.data.SmartItemAdapter;
-import br.com.etecia.sustainapp.data.SmartViewModel;
+import android.widget.Button;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Fragment Home que exibe cards explicando o conceito de Cidades Inteligentes.
