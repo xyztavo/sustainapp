@@ -25,4 +25,20 @@ public class SmartViewModel extends ViewModel {
             smartItems.setValue(currentList);
         }
     }
+
+    public void removeItem(int position) {
+        List<SmartItem> currentList = smartItems.getValue();
+        if (currentList != null && position >= 0 && position < currentList.size()) {
+            currentList.remove(position);
+            smartItems.setValue(currentList);
+        }
+    }
+
+    public void updateItem(int position, SmartItem item) {
+        List<SmartItem> currentList = smartItems.getValue();
+        if (currentList != null && position >= 0 && position < currentList.size()) {
+            currentList.set(position, item);
+            smartItems.setValue(currentList);
+        }
+    }
 }

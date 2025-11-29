@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import br.com.etecia.sustainapp.R;
 import br.com.etecia.sustainapp.databinding.FragmentHomeBinding;
@@ -55,7 +56,7 @@ public class HomeFragment extends Fragment {
 
         // Configurar cards
         binding.card1.setOnClickListener(v -> {
-            // Ação opcional
+            Navigation.findNavController(view).navigate(R.id.nav_cadastro);
         });
 
         binding.card2.setOnClickListener(v -> {

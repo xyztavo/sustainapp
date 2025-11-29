@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 
 import br.com.etecia.sustainapp.R;
+import br.com.etecia.sustainapp.data.SmartItem;
 import br.com.etecia.sustainapp.data.SmartItemAdapter;
 import br.com.etecia.sustainapp.data.SmartViewModel;
 import br.com.etecia.sustainapp.databinding.FragmentListaBinding;
@@ -39,7 +41,23 @@ public class ListaFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(requireActivity()).get(SmartViewModel.class);
-        adapter = new SmartItemAdapter(new ArrayList<>());
+        adapter = new SmartItemAdapter(new ArrayList<>(), new SmartItemAdapter.OnItemClickListener() {
+            @Override
+            public void onEdit(int position) {
+                SmartItem item = viewModel.getSmartItems().getValue().get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", item.getName());
+                bundle.putString("category", item.getCategory());
+                bundle.putString("description", item.getDescription());
+                bundle.putInt("position", position);
+                Navigation.findNavController(view).navigate(R.id.nav_cadastro, bundle);
+            }
+
+            @Override
+            public void onDelete(int position) {
+                viewModel.removeItem(position);
+            }
+        });
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setAdapter(adapter);

@@ -24,6 +24,8 @@ public class CadastroFragment extends Fragment {
 
     private FragmentCadastroBinding binding;
     private SmartViewModel viewModel;
+    private boolean isEditMode = false;
+    private int editPosition = -1;
 
     @Nullable
     @Override
@@ -38,6 +40,21 @@ public class CadastroFragment extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(SmartViewModel.class);
 
+        Bundle args = getArguments();
+        if (args != null) {
+            String name = args.getString("name");
+            String category = args.getString("category");
+            String description = args.getString("description");
+            editPosition = args.getInt("position", -1);
+            if (name != null && category != null && description != null) {
+                isEditMode = true;
+                binding.etName.setText(name);
+                binding.etCategory.setText(category);
+                binding.etDescription.setText(description);
+                binding.btnSave.setText("Atualizar");
+            }
+        }
+
         binding.btnSave.setOnClickListener(v -> {
             String name = binding.etName.getText().toString().trim();
             String category = binding.etCategory.getText().toString().trim();
@@ -45,8 +62,13 @@ public class CadastroFragment extends Fragment {
 
             if (!name.isEmpty() && !category.isEmpty() && !description.isEmpty()) {
                 SmartItem item = new SmartItem(name, category, description);
-                viewModel.addSmartItem(item);
-                Toast.makeText(getContext(), "Item salvo!", Toast.LENGTH_SHORT).show();
+                if (isEditMode) {
+                    viewModel.updateItem(editPosition, item);
+                    Toast.makeText(getContext(), "Item atualizado!", Toast.LENGTH_SHORT).show();
+                } else {
+                    viewModel.addSmartItem(item);
+                    Toast.makeText(getContext(), "Item salvo!", Toast.LENGTH_SHORT).show();
+                }
                 // Limpar campos
                 binding.etName.setText("");
                 binding.etCategory.setText("");
