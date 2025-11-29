@@ -36,11 +36,19 @@
         tools:layout="@layout/fragment_sobre" />
 
     <action
+        android:id="@+id/action_login_to_home"
+        app:destination="@id/nav_home" />
+
+    <action
+        android:id="@+id/action_home_to_cadastro"
+        app:destination="@id/nav_cadastro" />
+
+    <action
         android:id="@+id/action_cadastro_to_lista"
         app:destination="@id/nav_lista" />
 
     <action
-        android:id="@+id/action_login_to_home"
-        app:destination="@id/nav_home" />
+        android:id="@+id/action_lista_to_cadastro"
+        app:destination="@id/nav_cadastro" />
 
 </navigation>

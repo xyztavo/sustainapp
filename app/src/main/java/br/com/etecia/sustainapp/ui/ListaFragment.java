@@ -54,7 +54,7 @@ public class ListaFragment extends Fragment {
                 bundle.putString("category", item.getCategory());
                 bundle.putString("description", item.getDescription());
                 bundle.putInt("position", position);
-                Navigation.findNavController(view).navigate(R.id.nav_cadastro, bundle);
+                Navigation.findNavController(view).navigate(R.id.action_lista_to_cadastro, bundle);
             }
 
             @Override

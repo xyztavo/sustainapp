@@ -13,8 +13,6 @@ import androidx.navigation.Navigation;
 
 import br.com.etecia.sustainapp.R;
 import br.com.etecia.sustainapp.databinding.FragmentHomeBinding;
-import br.com.etecia.sustainapp.ui.tabs.Tab1Fragment;
-import br.com.etecia.sustainapp.ui.tabs.Tab2Fragment;
 
 /**
  * Fragment Home que exibe cards explicando o conceito de Cidades Inteligentes.
@@ -36,32 +34,9 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d("HomeFragment", "onViewCreated");
 
-        // Configurar TabLayout com listener
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Mobilidade"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Sustentabilidade"));
-
-        binding.tabLayout.addOnTabSelectedListener(new com.google.android.material.tabs.TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(com.google.android.material.tabs.TabLayout.Tab tab) {
-                Log.d("HomeFragment", "Tab selected: " + tab.getPosition());
-                if (tab.getPosition() == 0) {
-                    binding.tabContent.setText("Mobilidade Inteligente: Sistemas de transporte público eficientes, compartilhamento de veículos e otimização de tráfego.");
-                } else {
-                    binding.tabContent.setText("Sustentabilidade: Gestão de energia renovável, redução de emissões e preservação ambiental.");
-                }
-            }
-
-            @Override
-            public void onTabUnselected(com.google.android.material.tabs.TabLayout.Tab tab) {}
-
-            @Override
-            public void onTabReselected(com.google.android.material.tabs.TabLayout.Tab tab) {}
-        });
-
-        // Configurar cards
         binding.card1.setOnClickListener(v -> {
             Log.d("HomeFragment", "Card1 clicked, navigating to cadastro");
-            Navigation.findNavController(view).navigate(R.id.nav_cadastro);
+            Navigation.findNavController(view).navigate(R.id.action_home_to_cadastro);
         });
 
         binding.card2.setOnClickListener(v -> {
