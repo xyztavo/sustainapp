@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.tabs.TabLayoutMediator;
-
 import br.com.etecia.sustainapp.R;
 import br.com.etecia.sustainapp.databinding.FragmentHomeBinding;
 import br.com.etecia.sustainapp.ui.tabs.Tab1Fragment;
@@ -34,13 +32,26 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Configurar ViewPager2 com TabLayout
-        ViewPagerAdapter adapter = new ViewPagerAdapter(this);
-        binding.viewPager.setAdapter(adapter);
+        // Configurar TabLayout com listener
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Mobilidade"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Sustentabilidade"));
 
-        new TabLayoutMediator(binding.tabLayout, binding.viewPager,
-                (tab, position) -> tab.setText(adapter.getPageTitle(position))
-        ).attach();
+        binding.tabLayout.addOnTabSelectedListener(new com.google.android.material.tabs.TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(com.google.android.material.tabs.TabLayout.Tab tab) {
+                if (tab.getPosition() == 0) {
+                    binding.tabContent.setText("Mobilidade Inteligente: Sistemas de transporte público eficientes, compartilhamento de veículos e otimização de tráfego.");
+                } else {
+                    binding.tabContent.setText("Sustentabilidade: Gestão de energia renovável, redução de emissões e preservação ambiental.");
+                }
+            }
+
+            @Override
+            public void onTabUnselected(com.google.android.material.tabs.TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(com.google.android.material.tabs.TabLayout.Tab tab) {}
+        });
 
         // Configurar cards
         binding.card1.setOnClickListener(v -> {
